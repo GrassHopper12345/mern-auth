@@ -1,5 +1,5 @@
 const express = require('express');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const cors = require('cors');
 const {mongoose} = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -7,9 +7,11 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 // db connection
+console.log(process.env.MONGO_URL);
+console.log(process.env.JWT_SECRET);
 mongoose.connect(process.env.MONGO_URL)
 .then(() => console.log('Database Connected!'))
-.catch(() => console.log('Database Not Connected!', error))
+.catch((error) => console.log('Database Not Connected!', error))
 
 // middleware
 app.use(express.json());
